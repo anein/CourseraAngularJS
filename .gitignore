@@ -1,0 +1,11 @@
+logs/*
+!.gitkeep
+node_modules/
+bower_components/
+components/
+Gruntfile.js
+e2e-tests
+.yo-rc.json
+.travis.yml
+tmp
+.idea
