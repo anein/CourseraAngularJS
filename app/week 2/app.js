@@ -168,7 +168,7 @@ angular.module( 'confusionApp', [ 'ngMessages' ] )
         $scope.submitComment = function () {
 
             //Step 2: This is how you record the date
-            $scope.comment[ 'date' ] = new Date().toISOString();
+            $scope.comment.date = new Date().toISOString();
 
             // Step 3: Push your comment into the dish's comment array
             $scope.dish.comments.push( $scope.comment );
@@ -181,7 +181,7 @@ angular.module( 'confusionApp', [ 'ngMessages' ] )
             $scope.comment = {
                 'rating': 5
             };
-        }
+        };
     } ] )
 
 ;
