@@ -1,0 +1,15 @@
+<div class="media">
+  <div class="media-body">
+    <h2 class="media-heading">
+      <span ng-bind="promo.name"></span>
+      <span class="label label-danger" ng-bind="promo.label"></span>
+      <span class="badge" ng-bind="promo.price | currency"></span>
+    </h2>
+    <p ng-bind="promo.description"></p>
+  </div>
+  <div class="media-left media-middle">
+      <img class="media-object img-thumbnail" ng-src="{{promo.image}}" alt="{{ promo.name }}">
+  </div>
+</div>
+
+<br>

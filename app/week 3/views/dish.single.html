@@ -1,0 +1,114 @@
+<div class="row row-content">
+  <!--dish-->
+  <div ng-controller="DishDetailController">
+    <div class="col-xs-12 jumbotron ">
+      <div class="media">
+        <div class="media-left media-middle">
+          <a href="#">
+            <img class="media-object img-thumbnail" ng-src="{{dish.image}}" alt="Uthappizza">
+          </a>
+        </div>
+        <div class="media-body">
+          <h2 class="media-heading">
+            <span ng-bind="dish.name"></span>
+            <span class="label label-danger" ng-bind="dish.label"></span>
+            <span class="badge" ng-bind="dish.price | currency"></span>
+          </h2>
+          <p ng-bind="dish.description"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-xs-4 text-right">
+        <h6 class="h6">
+          Sortby:
+        </h6>
+      </div>
+      <div class="col-xs-8">
+        <input type="text" ng-model="sortedCriteria" />
+      </div>
+
+    </div>
+    <!--comments-->
+    <div class="col-xs-9 col-xs-offset-1">
+
+      <blockquote ng-repeat="c in dish.comments | orderBy:sortedCriteria">
+        <h6>
+          <span ng-bind="c.rating"></span>
+          <span>rating</span>
+        </h6>
+        <p ng-bind="c.comment"></p>
+        <footer>
+          <span ng-bind="c.author"></span>,
+          <span ng-bind="c.date | date:'MMM dd, yyyy'"></span>
+        </footer>
+      </blockquote>
+    </div>
+
+    <!-- -->
+
+    <div class="col-xs-9 col-xs-offset-1" ng-controller="DishCommentController">
+
+      <form class="form-horizontal" name="commentForm" ng-submit="submitComment()" novalidate>
+
+
+        <blockquote ng-show="commentForm.$valid && !commentForm.$pristine">
+          <h6>
+            <span ng-bind="comment.rating"></span>
+            <span>rating</span>
+          </h6>
+          <p ng-bind="comment.comment"></p>
+          <footer>
+            <span ng-bind="comment.author"></span>,
+            <span ng-bind="comment.date | date:'MMM dd, yyyy'"></span>
+          </footer>
+        </blockquote>
+
+        <h2>Add Comment:</h2>
+        <hr/>
+
+
+        <!--author-->
+        <div class="form-group" ng-class="{ 'has-error': commentForm.author.$touched && commentForm.author.$invalid }">
+          <label for="authorInput" class="control-label">Author</label>
+          <input type="text" class="form-control" id="authorInput" placeholder="Alexander N. White" name="author" ng-model="comment.author" ng-minlength="5" ng-maxlength="40" required />
+          <div ng-messages="commentForm.author.$error" class="help-block" ng-show="commentForm.author.$invalid && commentForm.author.$touched">
+            <p ng-message="minlength">Author name is too short.</p>
+            <p ng-message="maxlength">Author name is too long.</p>
+            <p ng-message="required">Author name is required.</p>
+          </div>
+
+
+        </div>
+
+        <div class="form-group">
+          <label>Rating</label>
+          <label class="radio-inline" ng-repeat="n in [1,2,3,4,5] ">
+            <input type="radio" name="optradio" ng-model="comment.rating" value="{{ n }}" />
+            <span ng-bind="n"></span>
+          </label>
+
+        </div>
+
+        <!--comment-->
+        <div class="form-group" ng-class="{ 'has-error': commentForm.text.$touched && commentForm.text.$invalid }">
+          <label for="commentInput" class="control-label">Comment</label>
+          <textarea class="form-control" rows="3" id="commentInput" name="text" ng-model="comment.comment" ng-minlength="10" required></textarea>
+
+          <div ng-messages="commentForm.text.$error" class="help-block" ng-show="commentForm.text.$invalid && commentForm.text.$touched">
+            <p ng-message="minlength">Text is too short.</p>
+            <p ng-message="required">Text is required.</p>
+          </div>
+        </div>
+        <!--button-->
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-default" ng-disabled="commentForm.$invalid">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
