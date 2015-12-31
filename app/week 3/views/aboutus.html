@@ -44,7 +44,22 @@
     <div class="col-xs-12 col-sm-9">
       <h2>Corporate Leadership</h2>
       <ul class="media-list">
-        <li ng-repeat="item in specialists" ng-include src="'views/specialist.list.html'"></li>
+        <!-- <li ng-repeat="item in specialists" ng-include src="'views/specialist.list.html'"> -->
+        <li ng-repeat="item in specialists">
+          <div class="media">
+            <div class="media-left">
+              <img class="media-object img-thumbnail" ng-src="{{item.image}}" alt="{{ item.name }}">
+            </div>
+            <div class="media-body">
+              <h2 class="media-heading">
+                <span ng-bind="item.name"></span>
+                <span class="label label-success" ng-bind="item.abbr"></span>
+                <span class="badge" ng-bind="item.designation"></span>
+              </h2>
+              <p ng-bind="item.description"></p>
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
 

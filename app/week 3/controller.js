@@ -66,9 +66,12 @@
 
   function IndexController( $scope, MenuFactory, CorporateFactory ) {
 
-    $scope.dishes = MenuFactory.getDishes();
+    $scope.dishes = MenuFactory.getDishes().filter( function( dish ){
+      return dish.label === 'Hot';
+    });
+
     $scope.promo = MenuFactory.getPromotion( 0 );
-    $scope.specialist = CorporateFactory.getLeader( 0 );
+    $scope.specialist = CorporateFactory.getLeader( 3 );
 
   }
 
