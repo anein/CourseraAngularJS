@@ -1,0 +1,16 @@
+<div class="media">
+  <div class="media-left media-middle">
+    <a ui-sref="app.dishdetails({id: dish._id})">
+      <img class="media-object img-thumbnail" ng-src="{{dish.image}}" alt="{{ dish.name }}">
+    </a>
+  </div>
+  <div class="media-body">
+    <h2 class="media-heading">
+      <a ui-sref="app.dishdetails({id: dish._id})" ng-bind="dish.name"></a>
+      <span class="label label-danger" ng-bind="dish.label"></span>
+      <span class="badge" ng-bind="dish.price | currency"></span>
+    </h2>
+    <p ng-bind="dish.description"></p>
+  </div>
+</div>
+<br>

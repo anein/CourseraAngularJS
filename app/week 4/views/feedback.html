@@ -1,0 +1,101 @@
+<h2>Feedback</h2>
+
+<div>
+  <form class="form-horizontal" name='feedbackForm' ng-submit="submitFeedback()" novalidate>
+    <!-- first name -->
+    <div class="form-group">
+      <label for="firstName" class="col-sm-2 control-label">First Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="firstName" placeholder="" required="" ng-model='feedback.firstName' />
+      </div>
+    </div>
+    <!-- last name -->
+    <div class="form-group">
+      <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+      <div class="col-sm-10">
+        <input type="text" ng class="form-control" ng-model='feedback.lastName' id="lastName" placeholder="" required="">
+      </div>
+    </div>
+    <!-- tel -->
+    <div class="form-group">
+      <label for="code" class="col-sm-2 control-label">Tel</label>
+      <div class="col-sm-4">
+        <input type="text" ng class="form-control" ng-model='feedback.code' id="code" placeholder="">
+      </div>
+      <div class="col-sm-4">
+        <input type="text" ng class="form-control" ng-model='feedback.phone' id="phone" placeholder="">
+      </div>
+    </div>
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" ng class="form-control" ng-model='feedback.email' id="email" placeholder="" required="">
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="form-group">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
+        <label class="radio-inline">
+          <input type="checkbox" name="optradio" ng-model="feedback.contact" />
+          <span> May we contact you?</span>
+        </label>
+      </div>
+
+      <div class="col-sm-6" ng-if="!!feedback.contact">
+        <select name="contactBy" id="contactBy" ng-model="feedback.contactBy">
+          <option>Phone or Email</option>
+          <option value="phone">Phone</option>
+          <option value="email">Email</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- comment -->
+    <div class="form-group">
+      <label for="commentInput" class="col-sm-2 control-label">Comment</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" rows="3" id="commentInput" name="text" ng-model="feedback.comment" ng-minlength="10" required></textarea>
+      </div>
+    </div>
+
+    <!-- submit -->
+
+    <div class="form-group text-right">
+      <button type="submit" class="btn btn-default" ng-disabled="feedbackForm.$invalid">Submit</button>
+    </div>
+
+
+
+  </form>
+
+
+  <div class="col-xs-12 jumbotron " ng-if='feedbacks'>
+
+    <h3>Feedbacks</h3>
+
+    <div class="media" ng-repeat='f in feedbacks | orderBy : date'>
+      <div class="media-body">
+        <dl class="dl-horizontal">
+          <dt>Date</dt>
+          <dd ng-bind='f.date | date'></dd>
+          <dt>Name</dt>
+          <dd ng-bind="f.firstName + f.lastName"></dd>
+          <dt>Email</dt>
+          <dd ng-bind='f.email'></dd>
+          <dt>Phone</dt>
+          <dd ng-bind='(f.code) + f.phone'></dd>
+          <div ng-if='f.contact && f.contactBy'>
+            <dt>Contact By</dt>
+            <dd ng-bind='f.contactBy'></dd>
+          </div>
+          <dt>Comment </dt>
+          <dd ng-bind='f.comment'></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+</div>
